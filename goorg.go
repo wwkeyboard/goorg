@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"errors"
 	"io"
+	"io/ioutil"
 	"strings"
 )
 
@@ -17,8 +18,12 @@ type Headline struct {
 }
 
 // FromFile parses a file into a HeadLine
-func FromFile(name string) (Headline, error) {
-	return Headline{}, nil
+func FromFile(name string) (*Headline, error) {
+	file, err := ioutil.ReadFile(name)
+	if err != nil {
+		return nil, err
+	}
+	return parseBody(bytes.NewReader(file))
 }
 
 func parseBody(body io.Reader) (*Headline, error) {

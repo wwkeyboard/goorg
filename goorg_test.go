@@ -1,7 +1,6 @@
 package goorg
 
 import (
-	"fmt"
 	"strings"
 	"testing"
 )
@@ -31,7 +30,6 @@ func TestParseLineWithoutHeading(t *testing.T) {
 }
 
 func TestReadFile(t *testing.T) {
-	t.Skip("blah")
 	o, err := FromFile("./test.org")
 	if err != nil {
 		t.Error(err)
@@ -53,8 +51,6 @@ func TestParseBody(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	fmt.Println(h.Headlines)
 
 	if len(h.Headlines) != 2 {
 		t.Error("Didn't count headlines correctly")
