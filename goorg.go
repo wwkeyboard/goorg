@@ -17,6 +17,26 @@ type Headline struct {
 	Headlines []*Headline
 }
 
+func (h Headline) toString() string {
+	ret := ""
+	for i := 0; i < h.Depth; i++ {
+		ret += "*"
+	}
+
+	ret += " "
+
+	ret += h.Title
+
+	ret += "\n"
+
+	for _, l := range h.Headlines {
+		ret += l.toString()
+		ret += "\n"
+	}
+
+	return ret
+}
+
 // FromFile parses a file into a HeadLine
 func FromFile(name string) (*Headline, error) {
 	file, err := ioutil.ReadFile(name)

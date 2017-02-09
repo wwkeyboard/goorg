@@ -1,6 +1,7 @@
 package goorg
 
 import (
+	"bytes"
 	"strings"
 	"testing"
 )
@@ -68,5 +69,20 @@ func TestParseBody(t *testing.T) {
 
 	if !strings.Contains(second.Text.String(), "something") {
 		t.Error("Didn't parse second body Text")
+	}
+}
+
+func TestWriteBody(t *testing.T) {
+	h := Headline{
+		Title: "foo",
+		Text:  *bytes.NewBufferString("** bar"),
+		Depth: 1,
+	}
+
+	planned := `* foo
+** bar`
+
+	if planned == h.toString() {
+		t.Error("Didn't convert to string correctly.")
 	}
 }
